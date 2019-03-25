@@ -7,6 +7,7 @@ const peopleColumnConfig = {
     title: 'Имя', // в таблице колонка будет так называться
     isSortable: true, // по этой колонке можно сортировать
     isSearchable: true, // поиск будет проверять эту и последнюю колонки
+    link: '/person/:name'
   },
   sex: {
     title: 'Пол',
