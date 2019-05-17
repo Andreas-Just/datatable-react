@@ -1,4 +1,4 @@
-.App {
+.App h1 {
   text-align: center;
 }
 
@@ -22,10 +22,9 @@
   border-right: 1px solid dimgray;
 }
 
-.Datatable td:nth-child(1),
-.Datatable td:nth-child(5),
-.Datatable td:nth-child(6) {
-  text-align: left;
+
+.Datatable td:nth-child(n + 3):nth-child(-n + 5) {
+  text-align: center;
 }
 
 .sortable-up::after,
