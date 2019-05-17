@@ -22,12 +22,12 @@ const peopleColumnConfig = {
   },
   father: {
     title: 'Отец',
-    isSortable: true,
+    // isSortable: true,
     isSearchable: true,
   },
   mother: {
     title: 'Мать',
-    isSortable: true,
+    // isSortable: true,
     isSearchable: true,
   }
 };
