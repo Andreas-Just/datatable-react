@@ -10,10 +10,11 @@ class Datatable extends React.Component {
   handleHeaderClick = (key) => {
     if (!this.props.config[key].isSortable) return;
 
-    this.setState(({sortColumn, sortAsc}) => {
+    this.setState(({sortColumn, sortAsc, arrow}) => {
       return {
         sortColumn: key,
         sortAsc: sortColumn === key ? !sortAsc : true,
+        // arrow: sortAsc === arrow ? 'sortable-up' : 'sortable-down'
       };
     })
 
@@ -23,6 +24,11 @@ class Datatable extends React.Component {
     const visibleItems = this.state.sortColumn
       ? this.props.items
           .sort((item1, item2) => {
+
+            if (!item1[this.state.sortColumn]) {
+              item1[this.state.sortColumn] = '';
+            }
+
             const value1 = item1[this.state.sortColumn];
             const value2 = item2[this.state.sortColumn];
             const sign = this.state.sortAsc ? 1 : -1;
@@ -33,18 +39,20 @@ class Datatable extends React.Component {
           })
       : this.props.items;
 
-
     const { config } = this.props;
 
     return (
-      <div className="Datatable">
-        <table>
+      <div>
+        <table className="Datatable">
           <thead>
             <tr>
               {Object.entries(config).map(([key, value]) => (
                 <th
                   key={key}
-                  className={value.isSortable ? 'sortable-column' : ''}
+                  className={
+                    !value.isSortable ? '' :
+                    this.state.sortAsc ? 'sortable-up' : 'sortable-down'
+                  }
                   onClick={() => this.handleHeaderClick(key)}
                 >
                   {value.title}

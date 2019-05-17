@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './App.css';
 import Datatable from './Datatable';
 
@@ -22,12 +23,12 @@ const peopleColumnConfig = {
   },
   father: {
     title: 'Отец',
-    // isSortable: true,
+    isSortable: true,
     isSearchable: true,
   },
   mother: {
     title: 'Мать',
-    // isSortable: true,
+    isSortable: true,
     isSearchable: true,
   }
 };
