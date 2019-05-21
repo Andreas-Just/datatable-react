@@ -6,17 +6,29 @@
   text-align: center;
 }
 
+.Datatable__filter {
+  display: block;
+  margin: 0 auto 8px;
+  padding: 5px 10px;
+  width: 210px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+  border-image: initial;
+  box-sizing: border-box;
+}
+
+.Datatable__filter::placeholder {
+  text-align: center;
+}
+
 .Datatable__select {
   margin-bottom: 10px;
   padding-left: 10px;
   width: 70px;
   text-align-last: center;
   -webkit-appearance: button;
-}
-
-.Datatable__select:focus,
-.Datatable__pagination button:focus {
-  outline: none;
+  cursor: pointer;
 }
 
 .Datatable__pagination {
@@ -25,6 +37,13 @@
 
 .Datatable__pagination button {
   margin: 0 2px;
+  cursor: pointer;
+}
+
+.Datatable__filter:focus,
+.Datatable__select:focus,
+.Datatable__pagination button:focus {
+  outline: none;
 }
 
 .Table {
@@ -33,19 +52,24 @@
   border-spacing: 0;
 }
 
+.Table__link {
+  text-decoration: none;
+  /*font-style: italic;*/
+  color: darkblue;
+}
+
 .Table th {
-  border-bottom: 1px solid dimgray;
+  border-right: 1px solid dimgray;
 }
 
 .Table th,
 .Table td {
   padding: 5px 10px;
-  border-left: 1px solid dimgray;
+  border-bottom: 1px solid dimgray;
 }
 
-.Table th:last-child,
-.Table td:last-child {
-  border-right: 1px solid dimgray;
+.Table th:last-child{
+  border-right: none;
 }
 
 
@@ -55,7 +79,8 @@
 
 .Table__sort-up::after,
 .Table__sort-down::after {
-  color: red;
+  color: darkblue;
+  margin-left: 5px;
 }
 
 .Table__sort-up::after {

@@ -16,7 +16,9 @@ const peopleColumnConfig = {
     isSortable: true, // по этой колонке можно сортировать
     isSearchable: true, // поиск будет проверять эту и последнюю колонки
     render: (person) => (
-      <Link to={`/people/${person.born}`}>{person.name}</Link>
+      <Link to={`/people/${person.born}`} className="Table__link">
+        {person.name}
+      </Link>
     )
   },
   sex: {

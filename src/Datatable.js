@@ -21,34 +21,10 @@ class Datatable extends Component {
 
   };
 
-  getSortedItems = (items) => {
-    const { sortColumn, sortAsc } = this.state;
-
-    if (!sortColumn) {
-      return items;
-    }
-
-    const sign = sortAsc ? 1 : -1;
-    const sortFn = (a, b) => {
-
-      if (!a[sortColumn] && !b[sortColumn]) {
-        a[sortColumn] = '';
-        b[sortColumn] = '';
-      } else if (!a[sortColumn]) {
-        a[sortColumn] = '';
-      }
-
-      return typeof items[0][sortColumn] === 'number'
-        ? sign * (a[sortColumn] - b[sortColumn])
-        : sign * (a[sortColumn].localeCompare(b[sortColumn]));
-    };
-
-    return items.sort(sortFn);
-  };
-
   handlePerPageChange = (event) => {
     this.setState({
-      perPage: +event.target.value
+      perPage: +event.target.value,
+      page: 1,
     })
   };
 
@@ -71,28 +47,72 @@ class Datatable extends Component {
     });
   }, 500);
 
-  render() {
-    const { page, perPage, query, visibleQuery } = this.state;
-    const { config, items } = this.props;
-    const start = (page - 1) * perPage;
+  sortItems({ items, sortColumn, sortAsc }) {
+    if (!sortColumn) {
+      return items;
+    }
 
+    const sign = sortAsc ? 1 : -1;
+    const sortFn = (a, b) => {
+      if (!a[sortColumn] && !b[sortColumn]) {
+        a[sortColumn] = '';
+        b[sortColumn] = '';
+      } else if (!a[sortColumn]) {
+        a[sortColumn] = '';
+      }
+
+      return typeof items[0][sortColumn] === 'number'
+        ? sign * (a[sortColumn] - b[sortColumn])
+        : sign * (a[sortColumn].localeCompare(b[sortColumn]));
+    };
+
+    return [...items].sort(sortFn);
+  }
+
+  paginateItems({ items, page, perPage }) {
+    const start = (page - 1) * perPage;
     const end = start + perPage;
+
+    return items.slice(start, end);
+  }
+
+  filterItems({ items, query }) {
     const queryRegexp = new RegExp(query, 'i');
 
-    const sortedItems = this.getSortedItems(items);
-    const filteredItems = sortedItems
+    return items
       .filter(person => queryRegexp.test(person.name));
-    const visibleItems = filteredItems
-      .slice(start, end);
+  }
 
-    // console.log(debounce);
+
+  render() {
+    const { page, perPage, query, visibleQuery, sortColumn, sortAsc } = this.state;
+    const { config, items } = this.props;
+
+    const sortedItems = this.sortItems({
+      items,
+      sortColumn,
+      sortAsc,
+    });
+
+    const filteredItems = this.filterItems({
+      items: sortedItems,
+      query,
+    });
+
+    const visibleItems = this.paginateItems({
+      items: filteredItems,
+      page,
+      perPage,
+    });
 
     return (
       <div className="Datatable">
         <input
+          className="Datatable__filter"
           type="text"
           value={visibleQuery}
           onChange={this.handleQueryChange}
+          placeholder={"-- Please enter a name --"}
         />
 
         <select
