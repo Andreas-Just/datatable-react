@@ -1,13 +1,13 @@
 {
-  "main.css": "/datatable-react/static/css/main.0f54b0d5.chunk.css",
-  "main.js": "/datatable-react/static/js/main.ce36d088.chunk.js",
-  "main.js.map": "/datatable-react/static/js/main.ce36d088.chunk.js.map",
+  "main.css": "/datatable-react/static/css/main.d80e2e2e.chunk.css",
+  "main.js": "/datatable-react/static/js/main.d60a2913.chunk.js",
+  "main.js.map": "/datatable-react/static/js/main.d60a2913.chunk.js.map",
   "runtime~main.js": "/datatable-react/static/js/runtime~main.cf23a1ca.js",
   "runtime~main.js.map": "/datatable-react/static/js/runtime~main.cf23a1ca.js.map",
   "static/js/2.3f038d22.chunk.js": "/datatable-react/static/js/2.3f038d22.chunk.js",
   "static/js/2.3f038d22.chunk.js.map": "/datatable-react/static/js/2.3f038d22.chunk.js.map",
   "index.html": "/datatable-react/index.html",
-  "precache-manifest.b363992e3e56aa22f862ee0305ea5a4d.js": "/datatable-react/precache-manifest.b363992e3e56aa22f862ee0305ea5a4d.js",
+  "precache-manifest.49c6fd3c7cbb8b3dc524d79b202e021a.js": "/datatable-react/precache-manifest.49c6fd3c7cbb8b3dc524d79b202e021a.js",
   "service-worker.js": "/datatable-react/service-worker.js",
-  "static/css/main.0f54b0d5.chunk.css.map": "/datatable-react/static/css/main.0f54b0d5.chunk.css.map"
+  "static/css/main.d80e2e2e.chunk.css.map": "/datatable-react/static/css/main.d80e2e2e.chunk.css.map"
 }
