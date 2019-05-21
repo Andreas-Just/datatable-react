@@ -3,39 +3,65 @@
 }
 
 .Datatable {
+  text-align: center;
+}
+
+.Datatable__select {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  width: 70px;
+  text-align-last: center;
+  -webkit-appearance: button;
+}
+
+.Datatable__select:focus,
+.Datatable__pagination button:focus {
+  outline: none;
+}
+
+.Datatable__pagination {
+  margin-bottom: 20px;
+}
+
+.Datatable__pagination button {
+  margin: 0 2px;
+}
+
+.Table {
   margin: 0 auto 50px;
+  text-align: left;
   border-spacing: 0;
 }
 
-.Datatable th {
+.Table th {
   border-bottom: 1px solid dimgray;
 }
 
-.Datatable th,
-.Datatable td {
+.Table th,
+.Table td {
   padding: 5px 10px;
   border-left: 1px solid dimgray;
 }
 
-.Datatable th:last-child,
-.Datatable td:last-child {
+.Table th:last-child,
+.Table td:last-child {
   border-right: 1px solid dimgray;
 }
 
 
-.Datatable td:nth-child(n + 3):nth-child(-n + 5) {
+.Table td:nth-child(n + 3):nth-child(-n + 5) {
   text-align: center;
 }
 
-.sortable-up::after,
-.sortable-down::after {
+.Table__sort-up::after,
+.Table__sort-down::after {
   color: red;
 }
 
-.sortable-up::after {
+.Table__sort-up::after {
   content: '▼';
 }
 
-.sortable-down::after {
+.Table__sort-down::after {
   content: '▲';
 }

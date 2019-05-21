@@ -1,26 +1,28 @@
 import React, { Component } from 'react';
 
+import debounce from 'lodash/debounce';
+import Pagination from "./Pagination";
+
 class Datatable extends Component {
   state = {
     sortColumn: null,
     sortAsc: true,
+    perPage: 5,
+    page: 1,
+    query: '',
+    visibleQuery: '',
   };
 
   handleHeaderClick = (key) => {
-    if (!this.props.config[key].isSortable) return;
-
-    this.setState(({sortColumn, sortAsc}) => {
-      return {
-        sortColumn: key,
-        sortAsc: sortColumn === key ? !sortAsc : true,
-      };
-    })
+    this.setState((prevState) => ({
+      sortColumn: key,
+      sortAsc: prevState.sortColumn === key ? !prevState.sortAsc : true,
+    }));
 
   };
 
-  getSortedItems = () => {
+  getSortedItems = (items) => {
     const { sortColumn, sortAsc } = this.state;
-    const { items } = this.props;
 
     if (!sortColumn) {
       return items;
@@ -28,6 +30,7 @@ class Datatable extends Component {
 
     const sign = sortAsc ? 1 : -1;
     const sortFn = (a, b) => {
+
       if (!a[sortColumn] && !b[sortColumn]) {
         a[sortColumn] = '';
         b[sortColumn] = '';
@@ -43,13 +46,75 @@ class Datatable extends Component {
     return items.sort(sortFn);
   };
 
+  handlePerPageChange = (event) => {
+    this.setState({
+      perPage: +event.target.value
+    })
+  };
+
+  handlePageChange = (page) => {
+    this.setState({ page })
+  };
+
+  handleQueryChange = (event) => {
+    this.setState({
+      visibleQuery: event.target.value,
+    });
+
+    this.updateQuery(event.target.value);
+  };
+
+  updateQuery = debounce(query => {
+    this.setState({
+      query: query,
+      page: 1,
+    });
+  }, 500);
+
   render() {
-    const visibleItems = this.getSortedItems();
-    const { config } = this.props;
+    const { page, perPage, query, visibleQuery } = this.state;
+    const { config, items } = this.props;
+    const start = (page - 1) * perPage;
+
+    const end = start + perPage;
+    const queryRegexp = new RegExp(query, 'i');
+
+    const sortedItems = this.getSortedItems(items);
+    const filteredItems = sortedItems
+      .filter(person => queryRegexp.test(person.name));
+    const visibleItems = filteredItems
+      .slice(start, end);
+
+    // console.log(debounce);
 
     return (
-      <div>
-        <table className="Datatable">
+      <div className="Datatable">
+        <input
+          type="text"
+          value={visibleQuery}
+          onChange={this.handleQueryChange}
+        />
+
+        <select
+          className="Datatable__select"
+          onChange={this.handlePerPageChange}
+          value={this.state.perPage}
+        >
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="50">50</option>
+        </select>
+
+        <Pagination
+          page={page}
+          perPage={perPage}
+          totalCount={filteredItems.length}
+          onPageChange={this.handlePageChange}
+        />
+
+        <table className="Datatable__table Table">
           <thead>
             <tr>
               {Object.entries(config).map(([key, value]) => (
@@ -57,9 +122,12 @@ class Datatable extends Component {
                   key={key}
                   className={
                     !value.isSortable ? '' :
-                    this.state.sortAsc ? 'sortable-up' : 'sortable-down'
+                    this.state.sortAsc ? 'Table__sort-up' : 'Table__sort-down'
                   }
-                  onClick={() => this.handleHeaderClick(key)}
+                  onClick={value.isSortable
+                    ? () => this.handleHeaderClick(key)
+                    : null
+                  }
                 >
                   {value.title}
                 </th>
@@ -69,7 +137,13 @@ class Datatable extends Component {
 
           <tbody>
             {visibleItems.map(item =>
-              <Row key={item.name} item={item} config={config}/>
+              <tr key={item.name}>
+                { Object.keys(config).map(key => (
+                  <td key={key}>
+                    {config[key].render ? config[key].render(item) : item[key]}
+                  </td>
+                ))}
+              </tr>
             )}
           </tbody>
         </table>
@@ -77,24 +151,5 @@ class Datatable extends Component {
     );
   }
 }
-
-const Row = ({ item, config }) => (
-  <tr>
-    { Object.keys(config).map(key => (
-      <Cell
-        key={key}
-        item={item}
-        column={key}
-        render={config[key].render}
-      />
-    ))}
-  </tr>
-);
-
-const Cell = ({ item, column, render }) => {
-  return (
-    <td>{render ? render(item) : item[column]}</td>
-  );
-};
 
 export default Datatable;

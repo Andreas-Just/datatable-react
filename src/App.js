@@ -46,25 +46,33 @@ class App extends Component {
   state = {
     people: [],
     config: peopleColumnConfig,
+    isLoaded: false,
   };
 
   async componentDidMount() {
     const response = await fetch('https://andreas-just.github.io/library-json/people/people.json');
     const people = await response.json();
 
-    this.setState({ people });
+    this.setState({
+      people,
+      isLoaded: true
+    });
   }
 
   render () {
-    const { people, config } = this.state;
+    const { people, config, isLoaded } = this.state;
 
     return (
       <div className="App">
         <h1>Datatable</h1>
-        <Datatable
-          items={people}
-          config={config}
-        />
+        {isLoaded ? (
+          <Datatable
+            items={people}
+            config={config}
+          />
+        ) : (
+          <p>Loading...</p>
+        )}
       </div>
     );
   }
