@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+.destroy,
+.Datatable__filter:focus,
+.Datatable__select:focus,
+.Datatable__pagination button:focus {
+  outline: none;
+}
+
 .Datatable {
   text-align: center;
 }
@@ -40,12 +47,6 @@
   cursor: pointer;
 }
 
-.Datatable__filter:focus,
-.Datatable__select:focus,
-.Datatable__pagination button:focus {
-  outline: none;
-}
-
 .Table {
   margin: 0 auto 50px;
   text-align: left;
@@ -54,7 +55,6 @@
 
 .Table__link {
   text-decoration: none;
-  /*font-style: italic;*/
   color: darkblue;
 }
 
@@ -64,6 +64,7 @@
 
 .Table th,
 .Table td {
+  position: relative;
   padding: 5px 10px;
   border-bottom: 1px solid dimgray;
 }
@@ -89,4 +90,33 @@
 
 .Table__sort-down::after {
   content: '▲';
+}
+
+.destroy {
+  position: absolute;
+  top: 50%;
+  padding: 0;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  font-weight: bold;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(150, 0, 0, 1);
+  box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transform: translateY(-42%);
+  transition: box-shadow 500ms ease-in-out;
+}
+
+.destroy:hover {
+  box-shadow: none;
+
+}
+
+.destroy:active {
+  color: lemonchiffon;
+  background-color: rgba(120, 0, 0, 1);
 }

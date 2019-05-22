@@ -1,9 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import debounce from 'lodash/debounce';
 import Pagination from "./Pagination";
+import HeaderCell from "./HeaderCell";
+import DataCell from "./DataCell";
 
-class Datatable extends Component {
+class Datatable extends React.Component {
   state = {
     sortColumn: null,
     sortAsc: true,
@@ -142,19 +144,13 @@ class Datatable extends Component {
           <thead>
             <tr>
               {Object.entries(config).map(([key, value]) => (
-                <th
+                <HeaderCell
                   key={key}
-                  className={
-                    !value.isSortable ? '' :
-                    this.state.sortAsc ? 'Table__sort-up' : 'Table__sort-down'
-                  }
-                  onClick={value.isSortable
-                    ? () => this.handleHeaderClick(key)
-                    : null
-                  }
-                >
-                  {value.title}
-                </th>
+                  title={key}
+                  value={value}
+                  sortAsc={sortAsc}
+                  onHeaderClick={this.handleHeaderClick}
+                />
               ))}
             </tr>
           </thead>
@@ -162,10 +158,14 @@ class Datatable extends Component {
           <tbody>
             {visibleItems.map(item =>
               <tr key={item.name}>
-                { Object.keys(config).map(key => (
-                  <td key={key}>
-                    {config[key].render ? config[key].render(item) : item[key]}
-                  </td>
+                {Object.entries(config).map(([key, value]) => (
+                  <DataCell
+                    key={key}
+                    item={item}
+                    title={key}
+                    value={value}
+                    config={config}
+                  />
                 ))}
               </tr>
             )}

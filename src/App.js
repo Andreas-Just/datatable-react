@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Datatable from './Datatable/';
+
 import './App.css';
-import Datatable from './Datatable';
 
 const peopleColumnConfig = {
   checkbox: {
@@ -14,7 +15,7 @@ const peopleColumnConfig = {
   name: { // Только для тех ключей которые есть в columnConfig будут колонки в таблице
     title: 'Имя', // в таблице колонка будет так называться
     isSortable: true, // по этой колонке можно сортировать
-    isSearchable: true, // поиск будет проверять эту и последнюю колонки
+    isEditable: true, // ячейки из этой колонки можно редактировать
     render: (person) => (
       <Link to={`/people/${person.born}`} className="Table__link">
         {person.name}
@@ -23,10 +24,17 @@ const peopleColumnConfig = {
   },
   sex: {
     title: 'Пол',
+    isEditable: true,
   },
   born: {
     title: 'Год рождения',
     isSortable: true,
+    isEditable: true,
+  },
+  died: {
+    title: 'Год смерти',
+    isSortable: true,
+    isEditable: true,
   },
   age: {
     title: 'Возраст',
@@ -36,16 +44,16 @@ const peopleColumnConfig = {
   father: {
     title: 'Отец',
     isSortable: true,
-    isSearchable: true,
+    isEditable: true,
   },
   mother: {
     title: 'Мать',
     isSortable: true,
-    isSearchable: true,
+    isEditable: true,
   }
 };
 
-class App extends Component {
+class App extends React.Component {
   state = {
     people: [],
     config: peopleColumnConfig,
@@ -53,7 +61,9 @@ class App extends Component {
   };
 
   async componentDidMount() {
-    const response = await fetch('https://andreas-just.github.io/library-json/people/people.json');
+    const response = await fetch(
+      'https://andreas-just.github.io/library-json/people/people.json'
+    );
     const people = await response.json();
 
     this.setState({
