@@ -47,14 +47,14 @@ class Datatable extends Component {
     });
   }, 500);
 
-  sortItems({ items, sortColumn, sortAsc }) {
+  sortItems({ items, sortColumn, sortAsc, config }) {
     if (!sortColumn) {
       return items;
     }
 
     const sign = sortAsc ? 1 : -1;
     const sortFn = (a, b) => {
-      if (!a[sortColumn] && !b[sortColumn]) {
+      if (!a[sortColumn] && !b[sortColumn] && b[sortColumn] !== undefined) {
         a[sortColumn] = '';
         b[sortColumn] = '';
       } else if (!a[sortColumn]) {
@@ -63,7 +63,10 @@ class Datatable extends Component {
 
       return typeof items[0][sortColumn] === 'number'
         ? sign * (a[sortColumn] - b[sortColumn])
-        : sign * (a[sortColumn].localeCompare(b[sortColumn]));
+        : typeof items[0][sortColumn] === 'string'
+        ? sign * (a[sortColumn].localeCompare(b[sortColumn]))
+        : sign * (config.age.isSortable(a) - config.age.isSortable(b))
+
     };
 
     return [...items].sort(sortFn);
@@ -92,6 +95,7 @@ class Datatable extends Component {
       items,
       sortColumn,
       sortAsc,
+      config,
     });
 
     const filteredItems = this.filterItems({

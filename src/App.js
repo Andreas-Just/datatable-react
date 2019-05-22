@@ -30,6 +30,7 @@ const peopleColumnConfig = {
   },
   age: {
     title: 'Возраст',
+    isSortable: (person) => person.died - person.born,
     render: (person) => person.died - person.born
   },
   father: {
