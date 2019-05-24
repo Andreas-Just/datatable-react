@@ -63,18 +63,28 @@
 }
 
 .Table th,
-.Table td {
-  position: relative;
+.Table__td {
   padding: 5px 10px;
   border-bottom: 1px solid dimgray;
 }
 
-.Table th:last-child{
+.Table th:nth-child(3) {
+  width: 33px;
+}
+
+.Table th:nth-child(4) {
+  width: 135px;
+}
+
+.Table th:nth-child(5) {
+  width: 110px;
+}
+
+.Table th:last-child {
   border-right: none;
 }
 
-
-.Table td:nth-child(n + 3):nth-child(-n + 5) {
+.Table__td:nth-child(n + 3):nth-child(-n + 6) {
   text-align: center;
 }
 
@@ -92,14 +102,24 @@
   content: '▲';
 }
 
-.destroy {
+.Table__td label {
+  position: relative;
+}
+
+.Table__input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.Table__destroy {
   position: absolute;
-  top: 50%;
+  top: 5px;
+  right: 3px;
   padding: 0;
-  right: 15px;
-  width: 16px;
-  height: 16px;
-  font-size: 10px;
+  width: 14px;
+  height: 14px;
+  font-size: 7px;
+  line-height: 15px;
   font-weight: bold;
   color: white;
   border: none;
@@ -107,16 +127,16 @@
   background-color: rgba(150, 0, 0, 1);
   box-shadow: 1px 1px 7px rgba(0, 0, 0, 0.6);
   cursor: pointer;
-  transform: translateY(-42%);
+  /* -webkit-transform: translateY(-42%); */
+  /* transform: translateY(-37%); */
   transition: box-shadow 500ms ease-in-out;
 }
 
-.destroy:hover {
+.Table__destroy:hover {
   box-shadow: none;
-
 }
 
-.destroy:active {
+.Table__destroy:active {
   color: lemonchiffon;
   background-color: rgba(120, 0, 0, 1);
 }

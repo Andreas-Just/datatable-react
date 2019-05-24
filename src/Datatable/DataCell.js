@@ -14,6 +14,14 @@ class DataCell extends React.Component {
     });
   };
 
+  handleChange = event => {
+    const { name, value } = event.target;
+
+    this.setState({
+      currentValue: value,
+    })
+  };
+
   onDelete = () => {
 
   };
@@ -23,27 +31,29 @@ class DataCell extends React.Component {
 
     return (
       <td
+        className="Table__td"
         onDoubleClick={value.isEditable
           ? () => this.onInputEditingDoubleClick(item[title])
           : null
         }
       >
         {(this.state.isEditing) ? (
-          <>
+          <label>
             <input
-              className="edit"
+              className="Table__input edit"
               type="text"
+              name={title}
               value={this.state.currentValue}
-              onChange={ (event) => this.setState({ currentValue: event.target.value }) }
+              onChange={this.handleChange}
               // onKeyPress={this.onInputEditingChange}
             />
             <button
-              className="destroy"
+              className="Table__destroy"
               onClick={this.onDelete}
             >
               X
             </button>
-          </>
+          </label>
         ) : (
           config[title].render ? config[title].render(item) : item[title]
         )}
