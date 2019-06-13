@@ -1,13 +1,15 @@
 {
-  "main.css": "/datatable-react/static/css/main.eaee2da3.chunk.css",
-  "main.js": "/datatable-react/static/js/main.4fbab5f5.chunk.js",
-  "main.js.map": "/datatable-react/static/js/main.4fbab5f5.chunk.js.map",
-  "runtime~main.js": "/datatable-react/static/js/runtime~main.cf23a1ca.js",
-  "runtime~main.js.map": "/datatable-react/static/js/runtime~main.cf23a1ca.js.map",
-  "static/js/2.6b9fcb5e.chunk.js": "/datatable-react/static/js/2.6b9fcb5e.chunk.js",
-  "static/js/2.6b9fcb5e.chunk.js.map": "/datatable-react/static/js/2.6b9fcb5e.chunk.js.map",
-  "index.html": "/datatable-react/index.html",
-  "precache-manifest.e054ca73dcbb5f622261d74ee1356af3.js": "/datatable-react/precache-manifest.e054ca73dcbb5f622261d74ee1356af3.js",
-  "service-worker.js": "/datatable-react/service-worker.js",
-  "static/css/main.eaee2da3.chunk.css.map": "/datatable-react/static/css/main.eaee2da3.chunk.css.map"
+  "files": {
+    "main.css": "/datatable-react/static/css/main.47e35c90.chunk.css",
+    "main.js": "/datatable-react/static/js/main.de49a6e0.chunk.js",
+    "main.js.map": "/datatable-react/static/js/main.de49a6e0.chunk.js.map",
+    "runtime~main.js": "/datatable-react/static/js/runtime~main.cf23a1ca.js",
+    "runtime~main.js.map": "/datatable-react/static/js/runtime~main.cf23a1ca.js.map",
+    "static/js/2.4f64b287.chunk.js": "/datatable-react/static/js/2.4f64b287.chunk.js",
+    "static/js/2.4f64b287.chunk.js.map": "/datatable-react/static/js/2.4f64b287.chunk.js.map",
+    "index.html": "/datatable-react/index.html",
+    "precache-manifest.42cb974816cc9602dc363c93f48a75d1.js": "/datatable-react/precache-manifest.42cb974816cc9602dc363c93f48a75d1.js",
+    "service-worker.js": "/datatable-react/service-worker.js",
+    "static/css/main.47e35c90.chunk.css.map": "/datatable-react/static/css/main.47e35c90.chunk.css.map"
+  }
 }
