@@ -7,7 +7,7 @@ class DataCell extends React.Component {
   };
 
   onInputEditingDoubleClick = (text) => {
-    console.log(text);
+    // console.log(text);
     this.setState({
       isEditing: true,
       currentValue: text,
@@ -16,6 +16,19 @@ class DataCell extends React.Component {
 
   handleChange = event => {
     const { name, value } = event.target;
+    const valueYears = /^([1-9]?|[1-9](\d){1,2}|1(\d){3}|20[0-2]\d)$/.test(value);
+    const valueSex = /^[mf]?$/.test(value);
+    const valueName = /^(?:([A-Z][a-z\.]{0,20})?)(?:\s[A-Z]?[a-z\.]{0,20}){0,4}$/.test(value);
+
+    if (name === 'sex' && !valueSex) {
+      return;
+    }
+    if (name === 'born' || name === 'died') {
+      if (!valueYears) return;
+    }
+    if (name === 'name' || name === 'mother' || name === 'father') {
+      if (!valueName) return;
+    }
 
     this.setState({
       currentValue: value,
