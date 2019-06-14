@@ -4,13 +4,36 @@ class DataCell extends React.Component {
   state = {
     isEditing: false,
     currentValue: '',
+    clickedOutside: true,
+  };
+
+  componentDidMount() {
+    document.addEventListener("mousedown", this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener("mousedown", this.handleClickOutside);
+  }
+
+  myRef = React.createRef();
+
+  handleClickOutside = event => {
+    if (!this.myRef.current.contains(event.target)) {
+      this.setState({
+        clickedOutside: true,
+        currentValue: this.state.currentValue,
+        isEditing: false,
+      });
+    }
   };
 
   onInputEditingDoubleClick = (text) => {
-    // console.log(text);
-    this.setState({
-      isEditing: true,
-      currentValue: text,
+
+    this.setState(({ currentValue }) => {
+      return {
+        isEditing: true,
+        currentValue: text && currentValue,
+      }
     });
   };
 
@@ -18,7 +41,7 @@ class DataCell extends React.Component {
     const { name, value } = event.target;
     const valueYears = /^([1-9]?|[1-9](\d){1,2}|1(\d){3}|20[0-2]\d)$/.test(value);
     const valueSex = /^[mf]?$/.test(value);
-    const valueName = /^(?:([A-Z][a-z\.]{0,20})?)(?:\s[A-Z]?[a-z\.]{0,20}){0,4}$/.test(value);
+    const valueName = /^(?:([A-Z][a-z]{0,20})?)(?:\s[A-Z]?[a-z]{0,20}){0,4}$/.test(value);
 
     if (name === 'sex' && !valueSex) {
       return;
@@ -41,6 +64,7 @@ class DataCell extends React.Component {
 
   render() {
     const { item, title, value, config } = this.props;
+    const contentTd = config[title].render ? config[title].render(item) : item[title];
 
     return (
       <td
@@ -49,6 +73,7 @@ class DataCell extends React.Component {
           ? () => this.onInputEditingDoubleClick(item[title])
           : null
         }
+        ref={this.myRef}
       >
         {(this.state.isEditing) ? (
           <label>
@@ -67,9 +92,9 @@ class DataCell extends React.Component {
               X
             </button>
           </label>
-        ) : (
-          config[title].render ? config[title].render(item) : item[title]
-        )}
+        ) :  (this.state.clickedOutside) ? (
+          this.state.currentValue || contentTd
+        ) : (this.state.currentValue)}
       </td>
     );
   }
