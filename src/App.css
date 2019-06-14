@@ -1,8 +1,0 @@
-.App {
-  text-align: center;
-}
-
-.sortable-column::after {
-  content: '▼';
-  color: red;
-}
