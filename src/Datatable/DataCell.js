@@ -4,7 +4,6 @@ class DataCell extends React.Component {
   state = {
     isEditing: false,
     currentValue: '',
-    clickedOutside: true,
   };
 
   componentDidMount() {
@@ -20,7 +19,6 @@ class DataCell extends React.Component {
   handleClickOutside = event => {
     if (!this.myRef.current.contains(event.target)) {
       this.setState({
-        clickedOutside: true,
         currentValue: this.state.currentValue,
         isEditing: false,
       });
@@ -92,9 +90,7 @@ class DataCell extends React.Component {
               X
             </button>
           </label>
-        ) :  (this.state.clickedOutside) ? (
-          this.state.currentValue || contentTd
-        ) : (this.state.currentValue)}
+        ) : (this.state.currentValue || contentTd)}
       </td>
     );
   }
