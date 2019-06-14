@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2f7384926bd2f11e1f67c20c98fa8ac9",
+    "revision": "397c8548a97d20967c32d8cadfa7c370",
     "url": "/datatable-react/index.html"
   },
   {
-    "revision": "6e734469a95722aa0c5e",
+    "revision": "752c7dfb984b8094129b",
     "url": "/datatable-react/static/css/main.47e35c90.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/datatable-react/static/js/2.4f64b287.chunk.js"
   },
   {
-    "revision": "6e734469a95722aa0c5e",
-    "url": "/datatable-react/static/js/main.de49a6e0.chunk.js"
+    "revision": "752c7dfb984b8094129b",
+    "url": "/datatable-react/static/js/main.16fd6eee.chunk.js"
   },
   {
     "revision": "13fc41ea1f2e115b3a99",
